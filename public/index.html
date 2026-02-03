@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moderator Daily Logger</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Moderator Daily Logger</h1>
+      <p>Track daily productivity and response times with persistent analytics.</p>
+    </header>
+
+    <section class="card">
+      <h2>Daily Input Form</h2>
+      <form id="daily-form">
+        <div class="grid">
+          <label>
+            Date
+            <input type="date" id="daily-date" required />
+          </label>
+          <label>
+            Tickets replied today
+            <input type="number" id="tickets-replied" min="0" required />
+          </label>
+          <label>
+            Work start time
+            <input type="time" id="work-start" required />
+          </label>
+          <label>
+            Work end time
+            <input type="time" id="work-end" required />
+          </label>
+        </div>
+        <button type="submit">Save Daily Stats</button>
+      </form>
+      <div class="table-actions">
+        <button id="export-daily" class="ghost">Export Daily CSV</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Tickets</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="daily-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Message Response Logger</h2>
+      <form id="response-form">
+        <div class="grid">
+          <label>
+            Date
+            <input type="date" id="response-date" required />
+          </label>
+          <label>
+            User message time
+            <input type="datetime-local" id="user-message-time" required />
+          </label>
+          <label>
+            My reply time
+            <input type="datetime-local" id="reply-time" required />
+          </label>
+        </div>
+        <button type="submit">Save Response Log</button>
+      </form>
+      <div class="table-actions">
+        <button id="export-responses" class="ghost">Export Response CSV</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>User Message</th>
+              <th>Reply</th>
+              <th>Response (min)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="response-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Analytics Dashboard</h2>
+      <div class="analytics-grid">
+        <div class="stat">
+          <span class="label">Average response time</span>
+          <strong id="avg-response">--</strong>
+        </div>
+        <div class="stat">
+          <span class="label">Fastest reply</span>
+          <strong id="fastest-response">--</strong>
+        </div>
+        <div class="stat">
+          <span class="label">Slowest reply</span>
+          <strong id="slowest-response">--</strong>
+        </div>
+        <div class="stat">
+          <span class="label">Total responses logged</span>
+          <strong id="total-responses">--</strong>
+        </div>
+      </div>
+
+      <div class="range">
+        <h3>Tickets handled across date range</h3>
+        <div class="grid">
+          <label>
+            Start date
+            <input type="date" id="range-start" />
+          </label>
+          <label>
+            End date
+            <input type="date" id="range-end" />
+          </label>
+        </div>
+        <button id="range-refresh" class="ghost">Refresh Range Totals</button>
+        <p class="range-total">Total tickets in range: <strong id="range-total">0</strong></p>
+      </div>
+
+      <div class="table-wrapper">
+        <h3>Average response time per day</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Average response (min)</th>
+              <th>Total responses</th>
+            </tr>
+          </thead>
+          <tbody id="response-analytics"></tbody>
+        </table>
+      </div>
+
+      <div class="table-wrapper">
+        <h3>Tickets handled per day</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Tickets replied</th>
+            </tr>
+          </thead>
+          <tbody id="tickets-analytics"></tbody>
+        </table>
+      </div>
+
+      <div class="chart-card">
+        <h3>Tickets trend</h3>
+        <canvas id="tickets-chart" width="900" height="240"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
